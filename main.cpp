@@ -119,7 +119,9 @@ int main(){
 
 		positions.push_back(newPos);
 	}
+	
 
+	long unsigned int frameCount = 1;
 	// while window is open 
 	while(!glfwWindowShouldClose(window)){
 		// Check for events (like resizing)
@@ -133,7 +135,7 @@ int main(){
 		// Binds the VAO to draw the data
 		glBindVertexArray(VAO);
 			
-		for(unsigned int i = 0; i < positions.size(); i++){
+		for(long unsigned int i = 0; i < positions.size() && i < frameCount*30; i++){
 			GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
 			mat4 tempModel;
 			tempModel = mat4(1.0f);
@@ -147,7 +149,7 @@ int main(){
 		
 		// Swap the drawn back buffer with the front buffer
 		glfwSwapBuffers(window);
-		
+		frameCount++;	
 	}
 
 	glDeleteProgram(shaderProgram);
